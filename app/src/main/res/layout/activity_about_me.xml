@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Auto layout, variables, and unit scale are not yet supported -->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/frame_1"
+    android:layout_width="411dp"
+    android:layout_height="733dp"
+    android:clipToOutline="true"
+    android:background="#FFFFFF">
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/frame_6"
+        android:layout_width="380dp"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp" >
+
+        <View
+            android:layout_width="380dp"
+            android:layout_height="100dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/rectangle_r25" />
+
+        <View
+            android:id="@+id/about_me_profile_picture"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="285dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="13dp"
+            android:background="#FFFFFF"/>
+
+        <TextView
+            android:id="@+id/about_me_name_title"
+            android:layout_width="248dp"
+            android:layout_height="22dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="17dp"
+            android:text="@string/about_me_name_title"
+            android:textAppearance="@style/about_me_name_title"
+            android:gravity="top" />
+
+        <TextView
+            android:id="@+id/about_me_email"
+            android:layout_width="185dp"
+            android:layout_height="15dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true"
+            android:text="@string/about_me_email"
+            android:textAppearance="@style/about_me_email"
+            android:gravity="top"
+            />
+
+        <TextView
+            android:id="@+id/about_me_balance"
+            android:layout_width="128dp"
+            android:layout_height="24dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="59dp"
+            android:text="@string/about_me_balance"
+            android:textAppearance="@style/about_me_balance"
+            android:gravity="top"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/frame_3"
+        android:layout_width="380dp"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="135dp">
+
+        <View
+            android:layout_width="380dp"
+            android:layout_height="100dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/rectangle_r25" />
+
+        <TextView
+            android:id="@+id/top_up_bala"
+            android:layout_width="134dp"
+            android:layout_height="22dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="19dp"
+            android:text="@string/about_me_topup"
+            android:textAppearance="@style/about_me_topup"
+            android:gravity="top"
+            />
+
+        <EditText
+            android:id="@+id/top_up_amount"
+            android:layout_width="225dp"
+            android:layout_height="wrap_content"
+            android:hint="Insert amount"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="45dp"
+            android:inputType="number"
+            />
+
+        <View
+            android:id="@+id/rectangle_5"
+            android:layout_width="82dp"
+            android:layout_height="37dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="280dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/topup_button"
+            />
+
+        <TextView
+            android:id="@+id/top_up"
+            android:layout_width="62dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="290dp"
+            android:layout_marginTop="40dp"
+            android:gravity="top"
+            android:text="@string/top_up"
+            android:textAppearance="@style/top_up" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

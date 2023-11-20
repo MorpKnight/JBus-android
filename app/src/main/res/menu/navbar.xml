@@ -17,7 +17,7 @@
     <item
         android:id="@+id/profile_icon"
         android:title="Setting"
-        app:actionViewClass="androidx.appcompat.widget.AppCompatButton"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="collapseActionView|always"
         android:icon="@drawable/profile_icon"/>
 </menu>
