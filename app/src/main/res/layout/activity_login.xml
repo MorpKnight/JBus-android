@@ -1,128 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
-    android:layout_marginHorizontal="60px">
+    tools:context=".LoginActivity">
 
-    <ImageView
-        android:id="@+id/logo_bus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/logobus"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="200px"/>
+    <View
+        android:layout_width="217dp"
+        android:layout_height="109dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="97dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/logobus" />
+
+    <View
+        android:id="@+id/rectangle_login"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="225dp"
+        android:background="@drawable/login_rectangle_bar" />
 
     <LinearLayout
-        android:id="@+id/login_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginVertical="38dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/logo_bus"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:layout_alignTop="@+id/rectangle_login"
+        android:layout_marginHorizontal="30dp"
+        android:gravity="center_vertical">
 
-        <TextView
+        <EditText
+            android:id="@+id/login_input_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="your email"
+            android:inputType="textEmailAddress"/>
+
+        <EditText
+            android:id="@+id/login_input_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="password"
+            android:inputType="textPassword"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:id="@+id/login_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Email:" />
+            android:text="Login"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20px"
             android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:background="@drawable/login_input_bar">
-
-            <ImageView
-                android:layout_width="75px"
-                android:layout_height="75px"
-                android:layout_marginStart="40px"
-                android:alpha="0.6"
-                android:background="@drawable/mail_icon" />
-
-            <EditText
-                android:id="@+id/login_email"
-                android:layout_marginStart="10px"
-                android:layout_marginEnd="50px"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="yoursluttydaddy@example.com"
-                android:inputType="textEmailAddress"/>
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Password:" />
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20px"
-            android:background="@drawable/login_input_bar"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="75px"
-                android:layout_height="75px"
-                android:layout_marginStart="40px"
-                android:alpha="0.6"
-                android:background="@drawable/password_icon" />
-
-            <EditText
-                android:id="@+id/login_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10px"
-                android:layout_marginEnd="50px"
-                android:hint="********"
-                android:inputType="textPassword|textWebPassword" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="center_horizontal">
 
-            <Button
-                android:id="@+id/login_button"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="LOGIN" />
+                android:text="Don't have an account?" />
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/create_account"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Doesn't have an account?" />
-
-                <TextView
-                    android:id="@+id/create_account"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Create Account"
-                    android:textStyle="italic|bold"/>
-
-            </LinearLayout>
+                android:layout_marginStart="5dp"
+                android:text="Sign Up" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

@@ -2,143 +2,172 @@
 <!-- Auto layout, variables, and unit scale are not yet supported -->
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/frame_1"
-    android:layout_width="411dp"
-    android:layout_height="733dp"
-    android:clipToOutline="true"
-    android:background="#FFFFFF">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToOutline="true">
+
+    <TextView
+        android:layout_width="96dp"
+        android:layout_height="36dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="25dp"
+        android:text="Profile"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:gravity="top" />
 
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/frame_6"
+        android:id="@+id/profilebann"
         android:layout_width="380dp"
-        android:layout_height="100dp"
+        android:layout_height="82dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="16dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp" >
+        android:layout_marginTop="75dp">
 
         <View
+            android:id="@+id/rectangle_1"
             android:layout_width="380dp"
-            android:layout_height="100dp"
-            android:layout_alignParentLeft="true"
+            android:layout_height="82dp"
+            android:layout_centerHorizontal="true"
             android:layout_alignParentTop="true"
-            android:background="@drawable/rectangle_r25" />
-
-        <View
-            android:id="@+id/about_me_profile_picture"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="285dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="13dp"
-            android:background="#FFFFFF"/>
+            android:background="@drawable/aboutme_top"
+            />
 
         <TextView
-            android:id="@+id/about_me_name_title"
-            android:layout_width="248dp"
+            android:id="@+id/aboutme_username"
+            android:layout_width="179dp"
             android:layout_height="22dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="22dp"
+            android:text="MorpKnight"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="top"
+            />
+
+        <TextView
+            android:id="@+id/aboutme_email"
+            android:layout_width="200dp"
+            android:layout_height="16dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="44dp"
+            android:text="christoffelsihombing@gmail.com"
+            android:textSize="13sp"
+            android:gravity="top"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/utilsbanner"
+        android:layout_width="380dp"
+        android:layout_height="358dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="190dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/aboutme_utils"
+            />
+
+        <TextView
+            android:layout_width="59dp"
+            android:layout_height="18dp"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="15dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="17dp"
-            android:text="@string/about_me_name_title"
-            android:textAppearance="@style/about_me_name_title"
-            android:gravity="top" />
+            android:text="Balance"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:gravity="top"
+            />
 
         <TextView
-            android:id="@+id/about_me_email"
-            android:layout_width="185dp"
+            android:id="@+id/balance"
+            android:layout_width="116dp"
+            android:layout_height="16dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="39dp"
+            android:text="Rp 123.456.789,00"
+            android:textSize="13sp"
+            android:gravity="top"
+            />
+
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="300dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="24dp">
+
+            <View
+                android:id="@+id/rectangle_2"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/topup_button"
+                />
+
+            <TextView
+                android:id="@+id/top_up"
+                android:layout_width="41dp"
+                android:layout_height="15dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="Top Up"
+                android:textSize="12sp"
+                android:gravity="top"
+                />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/edit_profil"
+            android:layout_width="80dp"
+            android:layout_height="18dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="85dp"
+            android:text="Edit profile"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:gravity="top"
+            />
+
+        <TextView
+            android:id="@+id/lorem_ipsum"
+            android:layout_width="145dp"
             android:layout_height="15dp"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="15dp"
-            android:layout_centerVertical="true"
-            android:text="@string/about_me_email"
-            android:textAppearance="@style/about_me_email"
-            android:gravity="top"
-            />
-
-        <TextView
-            android:id="@+id/about_me_balance"
-            android:layout_width="128dp"
-            android:layout_height="24dp"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="15dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="59dp"
-            android:text="@string/about_me_balance"
-            android:textAppearance="@style/about_me_balance"
+            android:layout_marginTop="103dp"
+            android:text="Lorem ipsum konci jalan tol"
+            android:textSize="12sp"
             android:gravity="top"
             />
-
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/frame_3"
-        android:layout_width="380dp"
-        android:layout_height="100dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="15dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="135dp">
-
-        <View
-            android:layout_width="380dp"
-            android:layout_height="100dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:background="@drawable/rectangle_r25" />
-
-        <TextView
-            android:id="@+id/top_up_bala"
-            android:layout_width="134dp"
-            android:layout_height="22dp"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="15dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="19dp"
-            android:text="@string/about_me_topup"
-            android:textAppearance="@style/about_me_topup"
-            android:gravity="top"
-            />
-
-        <EditText
-            android:id="@+id/top_up_amount"
-            android:layout_width="225dp"
-            android:layout_height="wrap_content"
-            android:hint="Insert amount"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="15dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="45dp"
-            android:inputType="number"
-            />
-
-        <View
-            android:id="@+id/rectangle_5"
-            android:layout_width="82dp"
-            android:layout_height="37dp"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="280dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/topup_button"
-            />
-
-        <TextView
-            android:id="@+id/top_up"
-            android:layout_width="62dp"
-            android:layout_height="20dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="290dp"
-            android:layout_marginTop="40dp"
-            android:gravity="top"
-            android:text="@string/top_up"
-            android:textAppearance="@style/top_up" />
-
-    </RelativeLayout>
 
 </RelativeLayout>

@@ -2,8 +2,11 @@ package com.GiovanChristoffelSihombingJBusRS.jbus_android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.Account;
 
 public class AboutMeActivity extends AppCompatActivity {
     public TextView aboutMeName, aboutMeEmail, aboutMeBalance;
@@ -12,12 +15,15 @@ public class AboutMeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_me);
 
-        aboutMeName = findViewById(R.id.about_me_name_title);
-        aboutMeEmail = findViewById(R.id.about_me_email);
-        aboutMeBalance = findViewById(R.id.about_me_balance);
+        aboutMeName = findViewById(R.id.aboutme_username);
+        aboutMeEmail = findViewById(R.id.aboutme_email);
+        aboutMeBalance = findViewById(R.id.balance);
 
-        aboutMeName.setText("morpknight");
-        aboutMeEmail.setText("christoffelsihombing@gmail.com");
-        aboutMeBalance.setText("Rp. 100.000");
+        SharedPreferences sh = getSharedPreferences("account", MODE_PRIVATE);
+        String name = sh.getString("name", "");
+        String email = sh.getString("email", "");
+
+        aboutMeName.setText(name);
+        aboutMeEmail.setText(email);
     }
 }
