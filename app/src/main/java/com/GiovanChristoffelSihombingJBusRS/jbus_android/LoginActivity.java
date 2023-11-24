@@ -82,7 +82,8 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString("email", response.body().payload.email);
                     editor.putString("password", response.body().payload.password);
                     editor.putFloat("balance", (float)response.body().payload.balance);
-                    editor.commit();
+                    editor.apply();
+                    finish();
                     moveActivity(LoginActivity.this, MainActivity.class);
                 }else{
                     viewToast(LoginActivity.this, "Error");

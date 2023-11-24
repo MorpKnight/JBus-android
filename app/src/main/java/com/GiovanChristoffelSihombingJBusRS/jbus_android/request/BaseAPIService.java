@@ -7,6 +7,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface BaseAPIService {
@@ -18,4 +19,7 @@ public interface BaseAPIService {
 
     @POST("account/login")
     Call<BaseResponse<Account>> login(@Query("email") String email, @Query("password") String password);
+
+    @POST("account/{id}/topUp")
+    Call<BaseResponse<Double>> topUp(@Path("id") int id, @Query("amount") double amount);
 }

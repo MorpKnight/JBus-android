@@ -19,7 +19,6 @@
         android:gravity="top" />
 
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/profilebann"
         android:layout_width="380dp"
         android:layout_height="82dp"
@@ -36,6 +35,28 @@
             android:layout_alignParentTop="true"
             android:background="@drawable/aboutme_top"
             />
+
+        <View
+            android:id="@+id/profile_picture"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="284dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/profile_picture" />
+
+        <TextView
+            android:id="@+id/profile_initial"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="284dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="6dp"
+            android:text="MK"
+            android:textSize="30sp"
+            android:gravity="center" />
 
         <TextView
             android:id="@+id/aboutme_username"
@@ -67,7 +88,6 @@
     </RelativeLayout>
 
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/utilsbanner"
         android:layout_width="380dp"
         android:layout_height="358dp"
@@ -109,6 +129,19 @@
             android:textSize="13sp"
             android:gravity="top"
             />
+
+
+        <EditText
+            android:id="@+id/topup_value"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/balance"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="25dp"
+            android:hint="Top Up Amount"
+            android:textSize="15dp"
+            android:inputType="number"
+            android:gravity="center_horizontal"/>
 
         <RelativeLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
