@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,19 +13,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.JBusandroid"
-        tools:targetApi="31"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
         <activity
-            android:name=".AboutMeActivity"
+            android:name=".intent.AddBusActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".intent.ManageBusActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".intent.BusScheduleActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".intent.RegisterRenterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WebViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".intent.AboutMeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".intent.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".intent.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".intent.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,6 +49,5 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>

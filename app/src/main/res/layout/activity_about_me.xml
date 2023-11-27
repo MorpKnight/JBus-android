@@ -174,32 +174,42 @@
 
         </RelativeLayout>
 
+        <View
+            android:id="@+id/renterContainer"
+            android:layout_width="380dp"
+            android:layout_height="70dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="70dp"
+            />
+
         <TextView
-            android:id="@+id/edit_profil"
-            android:layout_width="80dp"
+            android:id="@+id/aboutme_renter"
+            android:layout_width="172dp"
             android:layout_height="18dp"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="15dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="85dp"
-            android:text="Edit profile"
-            android:textSize="15sp"
+            android:layout_marginTop="87dp"
+            android:text="Register your Company"
             android:textStyle="bold"
+            android:textSize="15sp"
             android:gravity="top"
             />
 
         <TextView
-            android:id="@+id/lorem_ipsum"
-            android:layout_width="145dp"
+            android:id="@+id/aboutme_renter_footer"
+            android:layout_width="182dp"
             android:layout_height="15dp"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="15dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="103dp"
-            android:text="Lorem ipsum konci jalan tol"
+            android:layout_marginTop="105dp"
+            android:text="You're not renter yet!"
             android:textSize="12sp"
             android:gravity="top"
             />
+
     </RelativeLayout>
 
 

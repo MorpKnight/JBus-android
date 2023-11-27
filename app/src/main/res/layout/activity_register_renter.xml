@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".intent.LoginActivity">
+    tools:context=".intent.RegisterRenterActivity">
 
-<!--    <View-->
-<!--        android:layout_width="217dp"-->
-<!--        android:layout_height="109dp"-->
-<!--        android:layout_alignParentLeft="true"-->
-<!--        android:layout_marginLeft="97dp"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:layout_marginTop="45dp"-->
-<!--        android:background="@drawable/logobus" />-->
+    <!--    <View-->
+    <!--        android:layout_width="217dp"-->
+    <!--        android:layout_height="109dp"-->
+    <!--        android:layout_alignParentLeft="true"-->
+    <!--        android:layout_marginLeft="97dp"-->
+    <!--        android:layout_alignParentTop="true"-->
+    <!--        android:layout_marginTop="45dp"-->
+    <!--        android:background="@drawable/logobus" />-->
 
     <View
         android:id="@+id/rectangle_login"
@@ -37,40 +36,45 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Register your account"
+            android:text="Register your Company"
             android:gravity="center_horizontal"
             android:textSize="28sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="20dp" />
+            android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/register_name"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="your name"
+            android:text="Please fill in the form below"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="30dp" />
+
+        <EditText
+            android:id="@+id/register_renter_companyname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="company name"
             android:inputType="text"/>
 
         <EditText
-            android:id="@+id/register_email"
+            android:id="@+id/register_renter_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="your email"
-            android:inputType="textEmailAddress"
+            android:hint="company address"
             android:layout_marginTop="10dp"/>
 
         <EditText
-            android:id="@+id/register_password"
+            android:id="@+id/register_renter_phonenumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="password"
-            android:inputType="textPassword"
+            android:hint="company phone number"
+            android:inputType="phone|number"
             android:layout_marginTop="10dp" />
 
         <Button
-            android:id="@+id/register_button"
+            android:id="@+id/register_renter_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Register"
+            android:text="Register Company"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp" />
 

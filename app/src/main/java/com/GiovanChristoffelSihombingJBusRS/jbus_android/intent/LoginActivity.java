@@ -1,28 +1,26 @@
-package com.GiovanChristoffelSihombingJBusRS.jbus_android;
+package com.GiovanChristoffelSihombingJBusRS.jbus_android.intent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.R;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.Account;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.BaseResponse;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.LoggedAccount;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.request.BaseAPIService;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.request.UtilsApi;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.POST;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -69,21 +67,26 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     protected void handleLogin(String email, String password){
+//        AccountLogin accountLogin = new AccountLogin(email, password);
+//        System.out.println(accountLogin.email + " " + accountLogin.password);
         mApiService.login(email, password).enqueue(new Callback<BaseResponse<Account>>() {
             @Override
             public void onResponse(Call<BaseResponse<Account>> call, Response<BaseResponse<Account>> response) {
                 if(response.body().success && response.isSuccessful()){
                     viewToast(LoginActivity.this, "Success");
 
-                    SharedPreferences sharedPreferences = getSharedPreferences("account", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putInt("id", response.body().payload.id);
-                    editor.putString("name", response.body().payload.name);
-                    editor.putString("email", response.body().payload.email);
-                    editor.putString("password", response.body().payload.password);
-                    editor.putFloat("balance", (float)response.body().payload.balance);
-                    editor.apply();
-                    finish();
+//                    TODO: STATIC-in Account Logged nya, jangan pakai shared preferences
+                    LoggedAccount.loggedAccount = response.body().payload;
+                    System.out.println(LoggedAccount.loggedAccount.id);
+//                    SharedPreferences sharedPreferences = getSharedPreferences("account", Context.MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = sharedPreferences.edit();
+//                    editor.putInt("id", response.body().payload.id);
+//                    editor.putString("name", response.body().payload.name);
+//                    editor.putString("email", response.body().payload.email);
+//                    editor.putString("password", response.body().payload.password);
+//                    editor.putFloat("balance", (float)response.body().payload.balance);
+//                    editor.apply();
+//                    finish();
                     moveActivity(LoginActivity.this, MainActivity.class);
                 }else{
                     viewToast(LoginActivity.this, "Error");

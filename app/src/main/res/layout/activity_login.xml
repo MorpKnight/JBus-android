@@ -5,16 +5,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".intent.LoginActivity">
 
-    <View
-        android:layout_width="217dp"
-        android:layout_height="109dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="97dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="45dp"
-        android:background="@drawable/logobus" />
+<!--    <View-->
+<!--        android:layout_width="217dp"-->
+<!--        android:layout_height="109dp"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:layout_marginLeft="97dp"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_marginTop="45dp"-->
+<!--        android:background="@drawable/logobus" />-->
 
     <View
         android:id="@+id/rectangle_login"

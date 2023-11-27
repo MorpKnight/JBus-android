@@ -7,12 +7,11 @@ public class Account extends Serializable {
     public double balance;
     public Renter company;
 
-    public Account(String username, String email, String password, double balance, Object o) {
-        super();
-        this.name = username;
+    public Account(String name, String email, String password, double balance, Renter company) {
+        this.name = name;
         this.email = email;
         this.password = password;
         this.balance = balance;
-        this.company = (Renter) o;
+        this.company = company;
     }
 }

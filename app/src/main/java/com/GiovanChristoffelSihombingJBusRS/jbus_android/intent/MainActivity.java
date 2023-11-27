@@ -1,11 +1,8 @@
-package com.GiovanChristoffelSihombingJBusRS.jbus_android;
+package com.GiovanChristoffelSihombingJBusRS.jbus_android.intent;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -17,8 +14,9 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.R;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.adapter.BusArrayAdapter;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.Bus;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,14 +41,14 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 //        getSupportActionBar().hide();
-        listView = findViewById(R.id.listView);
+        listView = findViewById(R.id.busList);
         busArrayAdapter = new BusArrayAdapter(this, Bus.sampleBusList(1000));
         listView.setAdapter(busArrayAdapter);
 
         prevButton = findViewById(R.id.prevPage);
         nextButton = findViewById(R.id.nextPage);
         pageScroll = findViewById(R.id.pageNumberScroll);
-        busListView = findViewById(R.id.listView);
+        busListView = findViewById(R.id.busList);
 
         listBus = Bus.sampleBusList(1000);
         listSize = listBus.size();
@@ -79,7 +77,7 @@ public class MainActivity extends AppCompatActivity{
         val = val == 0 ? 0 : 1;
         noOfPages = listSize / pageSize + val;
 
-        LinearLayout ll = findViewById(R.id.btnLayout);
+        LinearLayout ll = findViewById(R.id.pageNumberContainer);
         btns = new Button[noOfPages];
         if(noOfPages <= 6){
             ((FrameLayout.LayoutParams) ll.getLayoutParams()).gravity = Gravity.CENTER;
@@ -89,6 +87,7 @@ public class MainActivity extends AppCompatActivity{
             btns[i] = new Button(this);
             btns[i].setBackgroundColor(getResources().getColor(android.R.color.transparent));
             btns[i].setText("" + (i + 1));
+            btns[i].setTextSize(10);
             btns[i].setTextColor(getResources().getColor(android.R.color.black));
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(100, 100);
             ll.addView(btns[i], lp);
@@ -138,6 +137,15 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 Intent intent = new Intent(MainActivity.this, AboutMeActivity.class);
+                startActivity(intent);
+                return true;
+            }
+        });
+
+        paymentItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
                 startActivity(intent);
                 return true;
             }
