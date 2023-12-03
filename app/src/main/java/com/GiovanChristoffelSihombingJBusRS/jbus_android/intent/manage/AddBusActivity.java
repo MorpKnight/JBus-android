@@ -1,4 +1,4 @@
-package com.GiovanChristoffelSihombingJBusRS.jbus_android.intent;
+package com.GiovanChristoffelSihombingJBusRS.jbus_android.intent.manage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,9 +12,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.R;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.intent.renter.ManageBusActivity;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.BusType;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.Facility;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.LoggedAccount;
@@ -48,8 +48,9 @@ public class AddBusActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_bus);
-        spinnerDeparture = findViewById(R.id.spinnerDeparture);
-        spinnerArrival = findViewById(R.id.spinnerArrival);
+        getSupportActionBar().setTitle("Add Bus");
+        spinnerDeparture = findViewById(R.id.deptStationSpinner);
+        spinnerArrival = findViewById(R.id.arrvStationSpinner);
         addBusButton = findViewById(R.id.addBusButton);
         busName = findViewById(R.id.addBusName);
         busCapacity = findViewById(R.id.addBusCapacity);
@@ -69,7 +70,7 @@ public class AddBusActivity extends AppCompatActivity {
         });
     }
 
-    protected void handleCheckBox(){
+    protected void handleCheckBox() {
         selectedFacility.clear();
         AC = findViewById(R.id.facilityAC);
         WIFI = findViewById(R.id.facilityWIFI);
@@ -77,47 +78,47 @@ public class AddBusActivity extends AppCompatActivity {
         LCD_TV = findViewById(R.id.facilityLCDTV);
         Lunch = findViewById(R.id.facilityLunch);
         Large_Baggage = findViewById(R.id.facilityLargeBaggage);
-        CoolBox = findViewById(R.id.facilityCoolBox);
+        CoolBox = findViewById(R.id.facilityCoolbox);
         Electric_Socket = findViewById(R.id.facilityElectricSocket);
 
-        if(AC.isChecked()){
+        if (AC.isChecked()) {
             selectedFacility.add(Facility.AC);
         }
 
-        if(WIFI.isChecked()){
+        if (WIFI.isChecked()) {
             selectedFacility.add(Facility.WIFI);
         }
 
-        if(Toilet.isChecked()){
+        if (Toilet.isChecked()) {
             selectedFacility.add(Facility.TOILET);
         }
 
-        if(LCD_TV.isChecked()){
+        if (LCD_TV.isChecked()) {
             selectedFacility.add(Facility.LCD_TV);
         }
 
-        if(Lunch.isChecked()){
+        if (Lunch.isChecked()) {
             selectedFacility.add(Facility.LUNCH);
         }
 
-        if(Large_Baggage.isChecked()){
+        if (Large_Baggage.isChecked()) {
             selectedFacility.add(Facility.LARGE_BAGGAGE);
         }
 
-        if(CoolBox.isChecked()){
+        if (CoolBox.isChecked()) {
             selectedFacility.add(Facility.COOL_BOX);
         }
 
-        if(Electric_Socket.isChecked()){
+        if (Electric_Socket.isChecked()) {
             selectedFacility.add(Facility.ELECTRIC_SOCKET);
         }
     }
 
-    protected void handleAddBus(){
+    protected void handleAddBus() {
         mApiService.create(LoggedAccount.loggedAccount.id, busName.getText().toString(), Integer.parseInt(busCapacity.getText().toString()), selectedFacility, selectedBusType, Integer.parseInt(busPrice.getText().toString()), selectedDeparture, selectedArrival).enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
 //                    TODO: Harusnya pindah ke ManageBusActivity
                     Intent intent = new Intent(AddBusActivity.this, ManageBusActivity.class);
                     finish();
@@ -142,8 +143,8 @@ public class AddBusActivity extends AppCompatActivity {
                     for (Station station : stations) {
                         stationName.add(station.stationName);
                     }
-                    ArrayAdapter<Station> adapterDeparture = new ArrayAdapter<>(mContext, android.R.layout.simple_list_item_1, stations);
-                    ArrayAdapter<Station> adapterArrival = new ArrayAdapter<>(mContext, android.R.layout.simple_list_item_1, stations);
+                    ArrayAdapter<String> adapterDeparture = new ArrayAdapter<>(mContext, android.R.layout.simple_list_item_1, stationName);
+                    ArrayAdapter<String> adapterArrival = new ArrayAdapter<>(mContext, android.R.layout.simple_list_item_1, stationName);
                     adapterDeparture.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
                     adapterArrival.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
                     spinnerDeparture.setAdapter(adapterDeparture);
@@ -181,7 +182,7 @@ public class AddBusActivity extends AppCompatActivity {
     }
 
     protected void handleBusType() {
-        spinnerBusType = findViewById(R.id.spinnerBusType);
+        spinnerBusType = findViewById(R.id.busTypeSpinner);
         ArrayAdapter<BusType> adapter = new ArrayAdapter<>(mContext, android.R.layout.simple_list_item_1, busType);
         adapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         spinnerBusType.setAdapter(adapter);

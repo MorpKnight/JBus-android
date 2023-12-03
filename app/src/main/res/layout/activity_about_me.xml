@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Auto layout, variables, and unit scale are not yet supported -->
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><!-- Auto layout, variables, and unit scale are not yet supported -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipToOutline="true">
@@ -10,31 +8,30 @@
         android:layout_width="96dp"
         android:layout_height="36dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="16dp"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="25dp"
+        android:gravity="top"
         android:text="Profile"
         android:textSize="30sp"
-        android:textStyle="bold"
-        android:gravity="top" />
+        android:textStyle="bold" />
 
     <RelativeLayout
         android:id="@+id/profilebann"
         android:layout_width="380dp"
         android:layout_height="82dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="16dp"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="75dp">
 
         <View
             android:id="@+id/rectangle_1"
             android:layout_width="380dp"
             android:layout_height="82dp"
-            android:layout_centerHorizontal="true"
             android:layout_alignParentTop="true"
-            android:background="@drawable/aboutme_top"
-            />
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/aboutme_top" />
 
         <View
             android:id="@+id/profile_picture"
@@ -51,39 +48,37 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="284dp"
             android:layout_alignParentTop="true"
+            android:layout_marginLeft="284dp"
             android:layout_marginTop="6dp"
+            android:gravity="center"
             android:text="MK"
-            android:textSize="30sp"
-            android:gravity="center" />
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/aboutme_username"
             android:layout_width="179dp"
             android:layout_height="22dp"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="15dp"
             android:layout_alignParentTop="true"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="22dp"
+            android:gravity="top"
             android:text="MorpKnight"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:gravity="top"
-            />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/aboutme_email"
             android:layout_width="200dp"
             android:layout_height="16dp"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="15dp"
             android:layout_alignParentTop="true"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="44dp"
-            android:text="christoffelsihombing@gmail.com"
-            android:textSize="13sp"
             android:gravity="top"
-            />
+            android:text="christoffelsihombing@gmail.com"
+            android:textSize="13sp" />
 
     </RelativeLayout>
 
@@ -92,43 +87,40 @@
         android:layout_width="380dp"
         android:layout_height="358dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="16dp"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="190dp">
 
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
             android:layout_alignParentTop="true"
-            android:background="@drawable/aboutme_utils"
-            />
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/aboutme_utils" />
 
         <TextView
             android:layout_width="59dp"
             android:layout_height="18dp"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="15dp"
             android:layout_alignParentTop="true"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="17dp"
+            android:gravity="top"
             android:text="Balance"
             android:textSize="15sp"
-            android:textStyle="bold"
-            android:gravity="top"
-            />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/balance"
             android:layout_width="116dp"
             android:layout_height="16dp"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="15dp"
             android:layout_alignParentTop="true"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="39dp"
-            android:text="Rp 123.456.789,00"
-            android:textSize="13sp"
             android:gravity="top"
-            />
+            android:text="Rp 123.456.789,00"
+            android:textSize="13sp" />
 
 
         <EditText
@@ -138,18 +130,17 @@
             android:layout_alignStart="@+id/balance"
             android:layout_marginStart="120dp"
             android:layout_marginTop="25dp"
+            android:gravity="center_horizontal"
             android:hint="Top Up Amount"
-            android:textSize="15dp"
             android:inputType="number"
-            android:gravity="center_horizontal"/>
+            android:textSize="15dp" />
 
-        <RelativeLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="60dp"
             android:layout_height="30dp"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="300dp"
             android:layout_alignParentTop="true"
+            android:layout_marginLeft="300dp"
             android:layout_marginTop="24dp">
 
             <View
@@ -158,8 +149,7 @@
                 android:layout_height="30dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:background="@drawable/topup_button"
-                />
+                android:background="@drawable/topup_button" />
 
             <TextView
                 android:id="@+id/top_up"
@@ -167,10 +157,9 @@
                 android:layout_height="15dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:text="Top Up"
-                android:textSize="12sp"
                 android:gravity="top"
-                />
+                android:text="Top Up"
+                android:textSize="12sp" />
 
         </RelativeLayout>
 
@@ -180,35 +169,98 @@
             android:layout_height="70dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="70dp"
-            />
+            android:layout_marginTop="70dp" />
 
         <TextView
             android:id="@+id/aboutme_renter"
             android:layout_width="172dp"
             android:layout_height="18dp"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="15dp"
             android:layout_alignParentTop="true"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="87dp"
-            android:text="Register your Company"
-            android:textStyle="bold"
-            android:textSize="15sp"
             android:gravity="top"
-            />
+            android:text="Register your Company"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/aboutme_renter_footer"
             android:layout_width="182dp"
             android:layout_height="15dp"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="15dp"
             android:layout_alignParentTop="true"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="105dp"
-            android:text="You're not renter yet!"
-            android:textSize="12sp"
             android:gravity="top"
-            />
+            android:text="You're not renter yet!"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:id="@+id/aboutme_renter_cancel"
+            android:layout_width="380dp"
+            android:layout_height="70dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="140dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/aboutme_cancel_created_bus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="15dp"
+                android:gravity="top"
+                android:text="Cancel Bus"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="15dp"
+                android:gravity="top"
+                android:text="Cancel your created bus"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/aboutme_approval"
+            android:layout_width="380dp"
+            android:layout_height="70dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="210dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/aboutme_approval_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="15dp"
+                android:gravity="top"
+                android:text="Cancel Approval"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="15dp"
+                android:gravity="top"
+                android:text="Cancel your approval"
+                android:textSize="12sp" />
+
+        </LinearLayout>
 
     </RelativeLayout>
 

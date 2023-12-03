@@ -1,14 +1,12 @@
-package com.GiovanChristoffelSihombingJBusRS.jbus_android.intent;
+package com.GiovanChristoffelSihombingJBusRS.jbus_android.intent.landing;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.R;
@@ -22,38 +20,34 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
-    private Button loginButton = null;
-    private TextView registerButton = null;
-    private EditText emailInput, passwordInput;
+    private EditText emailEditText, usernameEditText, passwordEditText;
     private BaseAPIService mApiService;
+    private Button registerButton = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
         getSupportActionBar().hide();
+
         mApiService = UtilsApi.getAPIService();
+        emailEditText = findViewById(R.id.register_email);
+        usernameEditText = findViewById(R.id.register_name);
+        passwordEditText = findViewById(R.id.register_password);
+        registerButton = findViewById(R.id.register_button);
 
-        registerButton = findViewById(R.id.create_account);
-        loginButton = findViewById(R.id.login_button);
-        emailInput = findViewById(R.id.login_input_email);
-        passwordInput = findViewById(R.id.login_input_password);
+        registerButton.setOnClickListener(v -> {
+            String email = emailEditText.getText().toString();
+            String username = usernameEditText.getText().toString();
+            String password = passwordEditText.getText().toString();
 
-        registerButton.setOnClickListener(v -> moveActivity(LoginActivity.this, RegisterActivity.class));
-        loginButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                String email = emailInput.getText().toString();
-                String password = passwordInput.getText().toString();
-
-                if (email.isEmpty() || password.isEmpty()){
-                    viewToast(LoginActivity.this, "Email or Password is Empty");
-                    return;
-                }
-
-                handleLogin(email, password);
+            if(email.isEmpty() || username.isEmpty() || password.isEmpty()){
+                viewToast(RegisterActivity.this, "Email, Username, or Password is Empty");
+                return;
             }
+
+            handleRegister(email, username, password);
         });
     }
 
@@ -66,18 +60,13 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(ctx, msg, Toast.LENGTH_SHORT).show();
     }
 
-    protected void handleLogin(String email, String password){
-//        AccountLogin accountLogin = new AccountLogin(email, password);
-//        System.out.println(accountLogin.email + " " + accountLogin.password);
-        mApiService.login(email, password).enqueue(new Callback<BaseResponse<Account>>() {
+    protected void handleRegister(String email, String username, String password){
+        mApiService.register(username, email, password).enqueue(new Callback<BaseResponse<Account>>() {
             @Override
             public void onResponse(Call<BaseResponse<Account>> call, Response<BaseResponse<Account>> response) {
                 if(response.body().success && response.isSuccessful()){
-                    viewToast(LoginActivity.this, "Success");
-
-//                    TODO: STATIC-in Account Logged nya, jangan pakai shared preferences
+                    viewToast(RegisterActivity.this, "Register Success");
                     LoggedAccount.loggedAccount = response.body().payload;
-                    System.out.println(LoggedAccount.loggedAccount.id);
 //                    SharedPreferences sharedPreferences = getSharedPreferences("account", Context.MODE_PRIVATE);
 //                    SharedPreferences.Editor editor = sharedPreferences.edit();
 //                    editor.putInt("id", response.body().payload.id);
@@ -85,17 +74,17 @@ public class LoginActivity extends AppCompatActivity {
 //                    editor.putString("email", response.body().payload.email);
 //                    editor.putString("password", response.body().payload.password);
 //                    editor.putFloat("balance", (float)response.body().payload.balance);
-//                    editor.apply();
-//                    finish();
-                    moveActivity(LoginActivity.this, MainActivity.class);
+//                    editor.commit();
+
+                    moveActivity(RegisterActivity.this, MainActivity.class);
                 }else{
-                    viewToast(LoginActivity.this, "Error");
+                    viewToast(RegisterActivity.this, "Register Failed");
                 }
             }
 
             @Override
             public void onFailure(Call<BaseResponse<Account>> call, Throwable t) {
-                viewToast(LoginActivity.this, "Error");
+                viewToast(RegisterActivity.this, "Register Failed onFailure");
             }
         });
     }

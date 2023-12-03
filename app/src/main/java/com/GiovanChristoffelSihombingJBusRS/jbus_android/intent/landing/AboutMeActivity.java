@@ -1,4 +1,4 @@
-package com.GiovanChristoffelSihombingJBusRS.jbus_android.intent;
+package com.GiovanChristoffelSihombingJBusRS.jbus_android.intent.landing;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.R;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.intent.renter.ManageBusActivity;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.intent.renter.RegisterRenterActivity;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.intent.cancel.CancelBusActivity;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.BaseResponse;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.LoggedAccount;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.request.BaseAPIService;
@@ -25,7 +28,7 @@ public class AboutMeActivity extends AppCompatActivity {
     public TextView aboutMeName, aboutMeEmail, aboutMeBalance, nameInitial, renterTitle, renterMessage;
     private String name, email;
     private float balance;
-    private View topUpButton, renterButton;
+    private View topUpButton, renterButton, cancelBus, cancelApproval;
     private EditText topUpAmount;
     private BaseAPIService mApiService;
     private int id;
@@ -44,6 +47,8 @@ public class AboutMeActivity extends AppCompatActivity {
         renterButton = findViewById(R.id.renterContainer);
         renterTitle = findViewById(R.id.aboutme_renter);
         renterMessage = findViewById(R.id.aboutme_renter_footer);
+        cancelBus = findViewById(R.id.aboutme_cancel_created_bus);
+        cancelApproval = findViewById(R.id.aboutme_approval_cancel);
         mApiService = UtilsApi.getAPIService();
 
 //        TODO: PAKAI STATIC DULU, jangan pakai shared preference
@@ -88,6 +93,13 @@ public class AboutMeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (LoggedAccount.loggedAccount.company == null) handleRenter();
                 else moveActivity(AboutMeActivity.this, ManageBusActivity.class);
+            }
+        });
+
+        cancelBus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moveActivity(AboutMeActivity.this, CancelBusActivity.class);
             }
         });
     }

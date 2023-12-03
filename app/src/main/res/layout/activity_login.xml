@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".intent.LoginActivity">
+    tools:context=".intent.landing.LoginActivity">
 
 <!--    <View-->
 <!--        android:layout_width="217dp"-->
@@ -38,6 +38,7 @@
             android:id="@+id/login_input_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="giovan@gmail.com"
             android:hint="your email"
             android:inputType="textEmailAddress"/>
 
@@ -46,6 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="password"
+            android:text="Giovan2103"
             android:inputType="textPassword"
             android:layout_marginTop="10dp"/>
 

@@ -50,12 +50,23 @@ public interface BaseAPIService {
                                    @Field("busType") BusType busType, @Field("price") int price,
                                    @Field("stationDepartureId") int stationDepartureId, @Field("stationArrivalId") int stationArrivalId);
 
+
+    @POST("bus/delete")
+    Call<BaseResponse<Bus>> delete(@Body int id);
+
+    @FormUrlEncoded
+    @POST("bus/deleteSchedule")
+    Call<BaseResponse<Bus>> deleteSchedule(@Field("busId") int busId, @Field("time") String time);
+
     @FormUrlEncoded
     @POST("bus/addSchedule")
     Call<BaseResponse<Bus>> addSchedule(@Field("busId") int busId, @Field("time") String time);
 
     @GET("bus/getMyBus")
     Call<List<Bus>> getMyBus(@Query("accountId") int accountId);
+
+    @GET("bus/getAllBus")
+    Call<List<Bus>> getAllBus();
 
     @GET("station/getAll")
     Call<List<Station>> getAllStation();

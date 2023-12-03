@@ -2,7 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.JBusandroid" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/teal_400</item>
+<!--        <item name="colorPrimary">@color/teal_400</item>-->
+        <item name="colorPrimary">#FF8A65</item>
         <item name="colorPrimaryVariant">@color/teal_600</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->

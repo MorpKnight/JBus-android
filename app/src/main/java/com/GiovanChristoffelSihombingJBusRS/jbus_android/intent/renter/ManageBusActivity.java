@@ -1,4 +1,4 @@
-package com.GiovanChristoffelSihombingJBusRS.jbus_android.intent;
+package com.GiovanChristoffelSihombingJBusRS.jbus_android.intent.renter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.R;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.adapter.ManageBusAdapter;
-import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.BaseResponse;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.intent.manage.AddBusActivity;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.intent.manage.BusScheduleActivity;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.Bus;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.LoggedAccount;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.request.BaseAPIService;
@@ -29,7 +31,10 @@ public class ManageBusActivity extends AppCompatActivity {
     private ListView listView;
     private List<Bus> busList;
     private ManageBusAdapter manageBusAdapter;
+    private ImageView add_edit_BusScheduleCalendar;
+    public static Bus renterSelectedBus;
     private BaseAPIService mApiService;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,16 +44,26 @@ public class ManageBusActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.listView_manageBus);
         mApiService = UtilsApi.getAPIService();
+        add_edit_BusScheduleCalendar = findViewById(R.id.add_edit_ScheduleAdapter);
 
-//        TODO: TAMBAH GET BUAT ALL BUS DAN STATION
         handleGetAll();
-        if(busList != null){
+        if (busList != null) {
             manageBusAdapter = new ManageBusAdapter(ManageBusActivity.this, busList);
             listView.setAdapter(manageBusAdapter);
         }
+
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            ImageView temp = view.findViewById(R.id.add_edit_ScheduleAdapter);
+            renterSelectedBus = (Bus) parent.getItemAtPosition(position);
+            temp.setOnClickListener(v -> {
+                Intent intent = new Intent(ManageBusActivity.this, BusScheduleActivity.class);
+                finish();
+                startActivity(intent);
+            });
+        });
     }
 
-    protected void handleGetAll(){
+    protected void handleGetAll() {
         mApiService.getMyBus(LoggedAccount.loggedAccount.id).enqueue(new Callback<List<Bus>>() {
             @Override
             public void onResponse(Call<List<Bus>> call, Response<List<Bus>> response) {

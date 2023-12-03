@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".intent.renter.ManageBusActivity">
+    tools:context=".intent.cancel.CancelBusActivity">
 
     <ListView
-        android:id="@+id/listView_manageBus"
+        android:id="@+id/listview_cancelbus"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

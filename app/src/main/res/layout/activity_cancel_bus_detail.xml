@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".intent.cancel.CancelBusDetailActivity"
+    android:layout_marginTop="25dp"
+    android:paddingHorizontal="16dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/cancelbus_busname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lorem ipsum"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/cancelbus_businfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lorem ipsum dolar siamet"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Which schedule want to delete?"
+        android:textSize="15sp"
+        android:layout_marginTop="20dp"/>
+
+    <GridLayout
+        android:id="@+id/cancelbus_gridlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+
+    </GridLayout>
+
+    <LinearLayout
+        android:id="@+id/cancelbus_button_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/cancelbus_delete_schedule"
+            android:layout_width="150dp"
+            android:layout_height="55dp"
+            android:text="Delete Schedule(s)"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OR"
+            android:layout_marginHorizontal="15dp"/>
+
+        <Button
+            android:id="@+id/cancelbus_delete_bus"
+            android:layout_width="150dp"
+            android:layout_height="55dp"
+            android:text="Delete Bus"/>
+
+    </LinearLayout>
+
+</LinearLayout>

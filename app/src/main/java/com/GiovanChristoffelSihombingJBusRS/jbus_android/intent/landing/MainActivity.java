@@ -1,7 +1,8 @@
-package com.GiovanChristoffelSihombingJBusRS.jbus_android.intent;
+package com.GiovanChristoffelSihombingJBusRS.jbus_android.intent.landing;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -13,13 +14,22 @@ import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.R;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.adapter.BusArrayAdapter;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.intent.order.MakeBookingActivity;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.intent.order.OrderBusActivity;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.Bus;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.request.BaseAPIService;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.request.UtilsApi;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity{
     public MenuItem searchItem, profileItem, paymentItem;
@@ -34,27 +44,28 @@ public class MainActivity extends AppCompatActivity{
     private List<Bus> listBus = new ArrayList<>();
     private Button prevButton = null;
     private Button nextButton = null;
-    private ListView busListView = null;
     private HorizontalScrollView pageScroll = null;
+    private BaseAPIService mApiService;
+    public static Bus busSelected;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 //        getSupportActionBar().hide();
         listView = findViewById(R.id.busList);
-        busArrayAdapter = new BusArrayAdapter(this, Bus.sampleBusList(1000));
+//        busArrayAdapter = new BusArrayAdapter(this, Bus.sampleBusList(1000));
         listView.setAdapter(busArrayAdapter);
 
         prevButton = findViewById(R.id.prevPage);
         nextButton = findViewById(R.id.nextPage);
         pageScroll = findViewById(R.id.pageNumberScroll);
-        busListView = findViewById(R.id.busList);
+        mApiService = UtilsApi.getAPIService();
+        getBusList();
 
-        listBus = Bus.sampleBusList(1000);
-        listSize = listBus.size();
-
-        paginationFooter();
-        goToPage(currentPage);
+        if(listBus != null){
+            paginationFooter();
+            viewPaginatedList(listBus, currentPage);
+        }
 
         prevButton.setOnClickListener(v -> {
             if(currentPage > 0){
@@ -68,6 +79,13 @@ public class MainActivity extends AppCompatActivity{
                 currentPage++;
                 goToPage(currentPage);
             }
+        });
+
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            Bus bus = (Bus) parent.getItemAtPosition(position);
+            busSelected = bus;
+            Intent intent = new Intent(MainActivity.this, OrderBusActivity.class);
+            startActivity(intent);
         });
 
     }
@@ -145,11 +163,38 @@ public class MainActivity extends AppCompatActivity{
         paymentItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                Intent intent = new Intent(MainActivity.this, MakeBookingActivity.class);
                 startActivity(intent);
                 return true;
             }
         });
         return true;
+    }
+
+    protected void getBusList(){
+        mApiService.getAllBus().enqueue(new Callback<List<Bus>>() {
+            @Override
+            public void onResponse(Call<List<Bus>> call, Response<List<Bus>> response) {
+                listBus = response.body();
+                listSize = listBus.size();
+                busArrayAdapter = new BusArrayAdapter(MainActivity.this, listBus);
+                listView.setAdapter(busArrayAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<Bus>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void viewToast(Context ctx, String msg){
+        Toast.makeText(ctx, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        finish();
+        super.onDestroy();
     }
 }

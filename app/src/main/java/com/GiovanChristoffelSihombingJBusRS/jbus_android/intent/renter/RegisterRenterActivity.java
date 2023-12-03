@@ -1,4 +1,4 @@
-package com.GiovanChristoffelSihombingJBusRS.jbus_android.intent;
+package com.GiovanChristoffelSihombingJBusRS.jbus_android.intent.renter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.R;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.intent.landing.AboutMeActivity;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.BaseResponse;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.LoggedAccount;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.Renter;
