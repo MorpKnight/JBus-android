@@ -13,7 +13,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:gravity="top"
         android:text="Add/Edit bus"
         android:textSize="30sp"

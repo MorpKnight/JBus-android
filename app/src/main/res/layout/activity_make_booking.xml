@@ -5,37 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingHorizontal="16dp"
     tools:context=".intent.order.MakeBookingActivity">
 
-    <Button
-        android:id="@+id/make_booking_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp" />
-
-    <LinearLayout
-        android:id="@+id/make_booking_toggle_calendar"
+    <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="50dp">
 
-        <CalendarView
-            android:id="@+id/make_booking_calendar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TimePicker
-            android:id="@+id/make_booking_time_picker"
+        <RadioGroup
+            android:id="@+id/make_booking_radiogroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:timePickerMode="spinner" />
+            android:scrollbarAlwaysDrawVerticalTrack="true">
 
-    </LinearLayout>
 
-    <Button
-        android:id="@+id/make_booking_view_toast"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        </RadioGroup>
 
+    </ScrollView>
 
 </LinearLayout>
