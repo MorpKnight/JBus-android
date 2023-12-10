@@ -3,15 +3,15 @@
     <style name="Theme.JBusandroid" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Primary brand color. -->
 <!--        <item name="colorPrimary">@color/teal_400</item>-->
-        <item name="colorPrimary">#FF8A65</item>
-        <item name="colorPrimaryVariant">@color/teal_600</item>
+        <item name="colorPrimary">#0259ee</item>
+        <item name="colorPrimaryVariant">#9702ee</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorSecondary">#ee9702</item>
+        <item name="colorSecondaryVariant">#ee0259</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">#00a3ec</item>
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">#e0e0e0</item>
     </style>

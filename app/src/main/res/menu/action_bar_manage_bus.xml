@@ -8,4 +8,10 @@
         app:showAsAction="collapseActionView|always"
         android:icon="@drawable/add_bus_icon"/>
 
+    <item
+        android:id="@+id/addStation"
+        android:title="Add Station"
+        app:showAsAction="collapseActionView|always"
+        android:icon="@drawable/add_station_icon" />
+
 </menu>

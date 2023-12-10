@@ -1,47 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!-- Auto layout, variables, and unit scale are not yet supported -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginHorizontal="16dp"
+    android:clipToOutline="true"
     android:orientation="vertical"
+    android:paddingHorizontal="16dp"
+    android:paddingTop="20dp"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".intent.order.OrderBusActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
-        android:gravity="top"
         android:text="Bus Details"
         android:textSize="30sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/orderbus_name"
+        android:id="@+id/orderbus_busname"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:gravity="top"
-        android:text="Bus Name"
-        android:textSize="25sp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:text="Bus name"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
+        android:id="@+id/orderbus_detail_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/order_businfo_rectangle">
+        app:cardCornerRadius="20dp"
+        app:cardElevation="4dp">
 
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginVertical="15dp"
             android:columnCount="2">
 
             <TextView
@@ -53,9 +50,9 @@
                 android:id="@+id/orderbus_bustype"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lorem ipsum dolar siamek"
+                android:layout_gravity="right"
                 android:gravity="right"
-                android:layout_gravity="right"/>
+                android:text="Lorem ipsum dolar siamek" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -66,9 +63,9 @@
                 android:id="@+id/orderbus_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lorem ipsum dolar siamek"
+                android:layout_gravity="right"
                 android:gravity="right"
-                android:layout_gravity="right"/>
+                android:text="Lorem ipsum dolar siamek" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -79,9 +76,9 @@
                 android:id="@+id/orderbus_seatleft"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lorem ipsum dolar siamek"
+                android:layout_gravity="right"
                 android:gravity="right"
-                android:layout_gravity="right"/>
+                android:text="Lorem ipsum dolar siamek" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -92,9 +89,9 @@
                 android:id="@+id/orderbus_departure_station"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lorem ipsum dolar siamek"
+                android:layout_gravity="right"
                 android:gravity="right"
-                android:layout_gravity="right"/>
+                android:text="Lorem ipsum dolar siamek" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -105,9 +102,9 @@
                 android:id="@+id/orderbus_arrival_station"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lorem ipsum dolar siamek"
+                android:layout_gravity="right"
                 android:gravity="right"
-                android:layout_gravity="right"/>
+                android:text="Lorem ipsum dolar siamek" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -118,81 +115,90 @@
                 android:id="@+id/orderbus_facilities"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lorem ipsum dolar siamek"
+                android:layout_gravity="right"
                 android:gravity="right"
-                android:layout_gravity="right"/>
+                android:text="Lorem ipsum dolar siamek" />
 
         </GridLayout>
 
-
-    </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
         android:text="Schedule"
-        android:textSize="25sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
-    <ScrollView
+    <androidx.cardview.widget.CardView
+        android:id="@+id/orderbus_schedule_container"
         android:layout_width="match_parent"
-        android:layout_height="145dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/order_businfo_rectangle">
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="4dp">
 
-        <GridLayout
-            android:id="@+id/orderbus_schedule"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="125dp"
+            android:minHeight="0dp"
             android:layout_marginHorizontal="15dp"
-            android:paddingVertical="15dp"
-            android:columnCount="3">
+            android:layout_marginVertical="15dp">
 
+            <GridLayout
+                android:id="@+id/orderbus_schedule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="3" >
 
+            </GridLayout>
 
-        </GridLayout>
+        </ScrollView>
 
-    </ScrollView>
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
         android:text="Seat"
-        android:textSize="25sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
-    <ScrollView
+    <androidx.cardview.widget.CardView
+        android:id="@+id/orderbus_seat_container"
         android:layout_width="match_parent"
-        android:layout_height="145dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/order_businfo_rectangle">
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="4dp">
 
-        <GridLayout
-            android:id="@+id/orderbus_seat"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="125dp"
+            android:minHeight="0dp"
             android:layout_marginHorizontal="15dp"
-            android:paddingVertical="15dp"
+            android:layout_marginVertical="15dp">
 
-            android:columnCount="5">
+            <GridLayout
+                android:id="@+id/orderbus_seat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="5" >
 
-        </GridLayout>
+            </GridLayout>
 
-    </ScrollView>
+        </ScrollView>
 
+    </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/orderbus_continue"
+        android:id="@+id/orderbus_button"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/addbus_button"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="Continue Payment"
-        android:textStyle="bold" />
+        app:cornerRadius="20dp" />
 
 </LinearLayout>

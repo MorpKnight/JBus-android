@@ -1,5 +1,6 @@
 package com.GiovanChristoffelSihombingJBusRS.jbus_android.intent.renter;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,7 +13,9 @@ import android.widget.ListView;
 
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.R;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.adapter.ManageBusAdapter;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.intent.landing.AboutMeActivity;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.intent.manage.AddBusActivity;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.intent.manage.AddStationActivity;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.intent.manage.BusScheduleActivity;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.Bus;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.LoggedAccount;
@@ -27,7 +30,7 @@ import retrofit2.Response;
 
 public class ManageBusActivity extends AppCompatActivity {
 
-    private MenuItem addItem;
+    private MenuItem addBus, addStation;
     private ListView listView;
     private List<Bus> busList;
     private ManageBusAdapter manageBusAdapter;
@@ -84,16 +87,34 @@ public class ManageBusActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.action_bar_manage_bus, menu);
 
-        addItem = menu.findItem(R.id.addBus);
+        addBus = menu.findItem(R.id.addBus);
+        addStation = menu.findItem(R.id.addStation);
 
-        addItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+        addBus.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 Intent intent = new Intent(ManageBusActivity.this, AddBusActivity.class);
+                finish();
                 startActivity(intent);
                 return false;
             }
         });
+
+        addStation.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem menuItem) {
+                finish();
+                startActivity(new Intent(ManageBusActivity.this, AddStationActivity.class));
+                return false;
+            }
+        });
+
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

@@ -51,10 +51,10 @@ public class AddBusActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Add Bus");
         spinnerDeparture = findViewById(R.id.deptStationSpinner);
         spinnerArrival = findViewById(R.id.arrvStationSpinner);
-        addBusButton = findViewById(R.id.addBusButton);
-        busName = findViewById(R.id.addBusName);
-        busCapacity = findViewById(R.id.addBusCapacity);
-        busPrice = findViewById(R.id.addBusPrice);
+        addBusButton = findViewById(R.id.addbus_button);
+        busName = findViewById(R.id.addbus_busname);
+        busCapacity = findViewById(R.id.addbus_buscapacity);
+        busPrice = findViewById(R.id.addbus_busprice);
         mContext = this;
 
         mApiService = UtilsApi.getAPIService();
@@ -197,5 +197,12 @@ public class AddBusActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        startActivity(new Intent(AddBusActivity.this, ManageBusActivity.class));
     }
 }

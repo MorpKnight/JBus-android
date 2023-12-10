@@ -46,7 +46,7 @@ public class ManageBusAdapter extends ArrayAdapter<Bus> {
         LinearLayout busTimeContainer = convertView.findViewById(R.id.busDepartureTime);
         // TODO: Masih belum jadi bagian parsingnya. Jadiin listview untuk melihat jadwal yang sudah ada karena berupa list
 
-        if(bus.schedules == null) {
+        if (bus.schedules == null) {
             busTimeContainer.setVisibility(LinearLayout.GONE);
         } else {
             busTimeContainer.setVisibility(LinearLayout.VISIBLE);

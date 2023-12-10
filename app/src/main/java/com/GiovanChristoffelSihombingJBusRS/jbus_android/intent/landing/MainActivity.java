@@ -20,7 +20,14 @@ import com.GiovanChristoffelSihombingJBusRS.jbus_android.R;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.adapter.BusArrayAdapter;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.intent.order.MakeBookingActivity;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.intent.order.OrderBusActivity;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.intent.order.history.HistoryListActivity;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.Account;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.BaseResponse;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.Bus;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.LoggedAccount;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.OrderHistory;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.Payment;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.StoredBus;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.request.BaseAPIService;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.request.UtilsApi;
 
@@ -51,20 +58,24 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        getSupportActionBar().hide();
+        getSupportActionBar().setTitle("Bus List");
         listView = findViewById(R.id.busList);
-//        busArrayAdapter = new BusArrayAdapter(this, Bus.sampleBusList(1000));
         listView.setAdapter(busArrayAdapter);
+
+        busSelected = null;
 
         prevButton = findViewById(R.id.prevPage);
         nextButton = findViewById(R.id.nextPage);
         pageScroll = findViewById(R.id.pageNumberScroll);
         mApiService = UtilsApi.getAPIService();
         getBusList();
+        getAllPayment();
 
         if(listBus != null){
             paginationFooter();
             viewPaginatedList(listBus, currentPage);
+        } else {
+            viewToast(this, "No Bus Available");
         }
 
         prevButton.setOnClickListener(v -> {
@@ -85,6 +96,7 @@ public class MainActivity extends AppCompatActivity{
             Bus bus = (Bus) parent.getItemAtPosition(position);
             busSelected = bus;
             Intent intent = new Intent(MainActivity.this, OrderBusActivity.class);
+            finish();
             startActivity(intent);
         });
 
@@ -155,6 +167,7 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 Intent intent = new Intent(MainActivity.this, AboutMeActivity.class);
+                finish();
                 startActivity(intent);
                 return true;
             }
@@ -163,7 +176,8 @@ public class MainActivity extends AppCompatActivity{
         paymentItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                Intent intent = new Intent(MainActivity.this, MakeBookingActivity.class);
+                Intent intent = new Intent(MainActivity.this, HistoryListActivity.class);
+                finish();
                 startActivity(intent);
                 return true;
             }
@@ -176,6 +190,8 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onResponse(Call<List<Bus>> call, Response<List<Bus>> response) {
                 listBus = response.body();
+                StoredBus.storedBus = listBus;
+                OrderHistory.buses = listBus;
                 listSize = listBus.size();
                 busArrayAdapter = new BusArrayAdapter(MainActivity.this, listBus);
                 listView.setAdapter(busArrayAdapter);
@@ -188,13 +204,48 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
+    protected void getAllPayment(){
+        mApiService.getAllPayment().enqueue(new Callback<List<Payment>>() {
+            @Override
+            public void onResponse(Call<List<Payment>> call, Response<List<Payment>> response) {
+                OrderHistory.payments = response.body();
+                OrderHistory.payments.forEach(payment -> {
+                    if(payment.buyerId == LoggedAccount.loggedAccount.id){
+                        OrderHistory.accountPayments.add(payment);
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(Call<List<Payment>> call, Throwable t) {
+
+            }
+        });
+    }
+
     private void viewToast(Context ctx, String msg){
         Toast.makeText(ctx, msg, Toast.LENGTH_SHORT).show();
     }
 
+    protected void updateBalance(){
+        mApiService.getAccountDetails(LoggedAccount.loggedAccount.email, LoggedAccount.loggedAccount.password).enqueue(new Callback<BaseResponse<Account>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<Account>> call, Response<BaseResponse<Account>> response) {
+                if(response.isSuccessful()){
+                    LoggedAccount.loggedAccount = response.body().payload;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<Account>> call, Throwable t) {
+
+            }
+        });
+    }
+
     @Override
     protected void onDestroy() {
-        finish();
+        System.out.println("DESTROYED");
         super.onDestroy();
     }
 }

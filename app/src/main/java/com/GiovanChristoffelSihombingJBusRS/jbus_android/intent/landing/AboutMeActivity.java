@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,44 +32,40 @@ public class AboutMeActivity extends AppCompatActivity {
     private String name, email;
     private float balance;
     private View topUpButton, renterButton, cancelBus, cancelApproval;
+    private Button logoutButton;
     private EditText topUpAmount;
     private BaseAPIService mApiService;
     private int id;
+
+    protected void getter() {
+        aboutMeName = findViewById(R.id.aboutme_username);
+        aboutMeEmail = findViewById(R.id.aboutme_email);
+        aboutMeBalance = findViewById(R.id.aboutme_balance_value);
+        nameInitial = findViewById(R.id.aboutme_profile_initial);
+        topUpButton = findViewById(R.id.aboutme_topup_button);
+        topUpAmount = findViewById(R.id.aboutme_topup_value);
+        renterButton = findViewById(R.id.aboutme_renter);
+        renterTitle = findViewById(R.id.aboutme_renter_title);
+        renterMessage = findViewById(R.id.aboutme_renter_desc);
+        cancelBus = findViewById(R.id.aboutme_cancelbus);
+        cancelApproval = findViewById(R.id.aboutme_approval);
+        logoutButton = findViewById(R.id.aboutme_logout_button);
+        mApiService = UtilsApi.getAPIService();
+    }
+
+    protected void setter() {
+        aboutMeName.setText(LoggedAccount.loggedAccount.name);
+        aboutMeEmail.setText(LoggedAccount.loggedAccount.email);
+        aboutMeBalance.setText(String.format("Rp. %s", LoggedAccount.loggedAccount.balance));
+        nameInitial.setText(LoggedAccount.loggedAccount.name.substring(0, 1));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_me);
-
-        aboutMeName = findViewById(R.id.aboutme_username);
-        aboutMeEmail = findViewById(R.id.aboutme_email);
-        aboutMeBalance = findViewById(R.id.balance);
-        nameInitial = findViewById(R.id.profile_initial);
-        topUpButton = findViewById(R.id.top_up);
-        topUpAmount = findViewById(R.id.topup_value);
-        renterButton = findViewById(R.id.renterContainer);
-        renterTitle = findViewById(R.id.aboutme_renter);
-        renterMessage = findViewById(R.id.aboutme_renter_footer);
-        cancelBus = findViewById(R.id.aboutme_cancel_created_bus);
-        cancelApproval = findViewById(R.id.aboutme_approval_cancel);
-        mApiService = UtilsApi.getAPIService();
-
-//        TODO: PAKAI STATIC DULU, jangan pakai shared preference
-//        SharedPreferences sh = getSharedPreferences("account", MODE_PRIVATE);
-//        name = sh.getString("name", "");
-//        email = sh.getString("email", "");
-//        balance = sh.getFloat("balance", 0);
-//        id = sh.getInt("id", 0);
-        id = LoggedAccount.loggedAccount.id;
-        name = LoggedAccount.loggedAccount.name;
-        email = LoggedAccount.loggedAccount.email;
-        balance = (float) LoggedAccount.loggedAccount.balance;
-        String balanceString = String.format("Rp. %s", balance);
-
-        aboutMeName.setText(name);
-        aboutMeEmail.setText(email);
-        aboutMeBalance.setText(balanceString);
-        nameInitial.setText(name.substring(0, 1));
+        getter();
+        setter();
 
         if (LoggedAccount.loggedAccount.company != null) {
             renterTitle.setText("Manage Bus");
@@ -80,7 +79,7 @@ public class AboutMeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (topUpAmount.getText().toString().isEmpty()) {
-                    viewToast(AboutMeActivity.this, "Please fill the top up amount");
+                    Toast.makeText(AboutMeActivity.this, "Please fill the top up amount", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Double value = Double.parseDouble(topUpAmount.getText().toString());
@@ -92,14 +91,28 @@ public class AboutMeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (LoggedAccount.loggedAccount.company == null) handleRenter();
-                else moveActivity(AboutMeActivity.this, ManageBusActivity.class);
+                else startActivity(new Intent(AboutMeActivity.this, ManageBusActivity.class));
             }
         });
 
         cancelBus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                moveActivity(AboutMeActivity.this, CancelBusActivity.class);
+                startActivity(new Intent(AboutMeActivity.this, CancelBusActivity.class));
+            }
+        });
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoggedAccount.loggedAccount = null;
+                SharedPreferences sharedPreferences = getSharedPreferences("credential", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("email", "");
+                editor.putString("password", "");
+                editor.apply();
+                finish();
+                startActivity(new Intent(AboutMeActivity.this, LoginActivity.class));
             }
         });
     }
@@ -108,11 +121,7 @@ public class AboutMeActivity extends AppCompatActivity {
         mApiService.topUp(id, value).enqueue(new Callback<BaseResponse<Double>>() {
             @Override
             public void onResponse(Call<BaseResponse<Double>> call, Response<BaseResponse<Double>> response) {
-                viewToast(AboutMeActivity.this, String.format("Top Up Success, new balance: Rp. %s", response.body().payload));
-//                SharedPreferences sharedPreferences = getSharedPreferences("account", Context.MODE_PRIVATE);
-//                SharedPreferences.Editor editor = sharedPreferences.edit();
-//                editor.putFloat("balance", response.body().payload.floatValue());
-//                editor.apply();
+                Toast.makeText(AboutMeActivity.this, "Top Up Success", Toast.LENGTH_SHORT).show();
                 LoggedAccount.loggedAccount.balance = response.body().payload;
                 try {
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -126,22 +135,19 @@ public class AboutMeActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<BaseResponse<Double>> call, Throwable t) {
-                viewToast(AboutMeActivity.this, "Top Up Failed");
+                Toast.makeText(AboutMeActivity.this, "Top Up Failed", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     protected void handleRenter() {
-        moveActivity(AboutMeActivity.this, RegisterRenterActivity.class);
-        return;
+        startActivity(new Intent(AboutMeActivity.this, RegisterRenterActivity.class));
     }
 
-    private void viewToast(Context ctx, String msg) {
-        Toast.makeText(ctx, msg, Toast.LENGTH_SHORT).show();
-    }
 
-    private void moveActivity(Context ctx, Class<?> cls){
-        Intent intent = new Intent(ctx, cls);
-        startActivity(intent);
+    @Override
+    public void onBackPressed() {
+        finish();
+        startActivity(new Intent(this, MainActivity.class));
     }
 }

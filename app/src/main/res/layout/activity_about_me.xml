@@ -1,268 +1,241 @@
 <?xml version="1.0" encoding="utf-8"?><!-- Auto layout, variables, and unit scale are not yet supported -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipToOutline="true">
+    android:clipToOutline="true"
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp"
+    android:paddingTop="20dp"
+    tools:context=".intent.landing.AboutMeActivity">
 
     <TextView
-        android:layout_width="96dp"
-        android:layout_height="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="20dp"
-        android:gravity="top"
         android:text="Profile"
         android:textSize="30sp"
         android:textStyle="bold" />
 
-    <RelativeLayout
-        android:id="@+id/profilebann"
-        android:layout_width="380dp"
-        android:layout_height="82dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="75dp">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginVertical="10dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="4dp">
 
-        <View
-            android:id="@+id/rectangle_1"
-            android:layout_width="380dp"
-            android:layout_height="82dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/aboutme_top" />
-
-        <View
-            android:id="@+id/profile_picture"
-            android:layout_width="70dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="284dp"
-            android:layout_marginTop="6dp"
-            android:background="@drawable/profile_picture" />
-
-        <TextView
-            android:id="@+id/profile_initial"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="284dp"
-            android:layout_marginTop="6dp"
-            android:gravity="center"
-            android:text="MK"
-            android:textSize="30sp" />
-
-        <TextView
-            android:id="@+id/aboutme_username"
-            android:layout_width="179dp"
-            android:layout_height="22dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="22dp"
-            android:gravity="top"
-            android:text="MorpKnight"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/aboutme_email"
-            android:layout_width="200dp"
-            android:layout_height="16dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="44dp"
-            android:gravity="top"
-            android:text="christoffelsihombing@gmail.com"
-            android:textSize="13sp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/utilsbanner"
-        android:layout_width="380dp"
-        android:layout_height="358dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="190dp">
-
-        <View
+        <GridLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/aboutme_utils" />
+            android:columnCount="2"
+            android:gravity="center_vertical">
 
-        <TextView
-            android:layout_width="59dp"
-            android:layout_height="18dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="17dp"
-            android:gravity="top"
-            android:text="Balance"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="15dp"
+                android:layout_marginStart="15dp"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/balance"
-            android:layout_width="116dp"
-            android:layout_height="16dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="39dp"
-            android:gravity="top"
-            android:text="Rp 123.456.789,00"
-            android:textSize="13sp" />
+                <TextView
+                    android:id="@+id/aboutme_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="USERNAME"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
 
+                <TextView
+                    android:id="@+id/aboutme_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="uremail@mail.com" />
+            </LinearLayout>
 
-        <EditText
-            android:id="@+id/topup_value"
-            android:layout_width="150dp"
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="right"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/profile_picture">
+
+                <TextView
+                    android:id="@+id/aboutme_profile_initial"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="UN"
+                    android:textSize="40dp" />
+
+            </LinearLayout>
+
+        </GridLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        app:cardCornerRadius="20dp">
+
+        <LinearLayout
+            android:id="@+id/aboutme_card_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/balance"
-            android:layout_marginStart="120dp"
-            android:layout_marginTop="25dp"
-            android:gravity="center_horizontal"
-            android:hint="Top Up Amount"
-            android:inputType="number"
-            android:textSize="15dp" />
-
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="60dp"
-            android:layout_height="30dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="300dp"
-            android:layout_marginTop="24dp">
-
-            <View
-                android:id="@+id/rectangle_2"
-                android:layout_width="60dp"
-                android:layout_height="30dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:background="@drawable/topup_button" />
-
-            <TextView
-                android:id="@+id/top_up"
-                android:layout_width="41dp"
-                android:layout_height="15dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:gravity="top"
-                android:text="Top Up"
-                android:textSize="12sp" />
-
-        </RelativeLayout>
-
-        <View
-            android:id="@+id/renterContainer"
-            android:layout_width="380dp"
-            android:layout_height="70dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="70dp" />
-
-        <TextView
-            android:id="@+id/aboutme_renter"
-            android:layout_width="172dp"
-            android:layout_height="18dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="87dp"
-            android:gravity="top"
-            android:text="Register your Company"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/aboutme_renter_footer"
-            android:layout_width="182dp"
-            android:layout_height="15dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="105dp"
-            android:gravity="top"
-            android:text="You're not renter yet!"
-            android:textSize="12sp" />
-
-        <LinearLayout
-            android:id="@+id/aboutme_renter_cancel"
-            android:layout_width="380dp"
-            android:layout_height="70dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="140dp"
-            android:gravity="center_vertical"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/aboutme_cancel_created_bus"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/aboutme_balance_container"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="15dp"
-                android:gravity="top"
-                android:text="Cancel Bus"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:orientation="horizontal"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="15dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="3">
+
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/aboutme_balance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Balance"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/aboutme_balance_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp. 0" />
+
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/aboutme_topup_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:hint="Topup Value"
+                        android:inputType="number" />
+
+                    <Button
+                        android:id="@+id/aboutme_topup_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:text="Top Up" />
+
+                </GridLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/aboutme_renter"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="15dp"
-                android:gravity="top"
-                android:text="Cancel your created bus"
-                android:textSize="12sp" />
+                android:orientation="vertical"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="15dp">
+
+                <TextView
+                    android:id="@+id/aboutme_renter_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Register your company"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/aboutme_renter_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Renter yet? Register one!" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/aboutme_cancelbus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel/Edit Bus"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel/Edit created bus!" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/aboutme_approval"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Approval"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Buyer/Client approval!" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/aboutme_approval"
-            android:layout_width="380dp"
-            android:layout_height="70dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="210dp"
-            android:gravity="center_vertical"
-            android:orientation="vertical">
+    </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/aboutme_approval_cancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="15dp"
-                android:gravity="top"
-                android:text="Cancel Approval"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:weightSum="2">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="15dp"
-                android:gravity="top"
-                android:text="Cancel your approval"
-                android:textSize="12sp" />
+        <Button
+            android:id="@+id/aboutme_logout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:text="Log Out" />
 
-        </LinearLayout>
+        <Button
+            android:id="@+id/aboutme_help_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:text="Help?" />
+    </LinearLayout>
 
-    </RelativeLayout>
-
-
-</RelativeLayout>
+</LinearLayout>

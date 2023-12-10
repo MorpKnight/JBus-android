@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -41,6 +42,8 @@ public class LoginActivity extends AppCompatActivity {
         passwordInput = findViewById(R.id.login_input_password);
 
         registerButton.setOnClickListener(v -> moveActivity(LoginActivity.this, RegisterActivity.class));
+
+        checkIfAlreadyLogin();
         loginButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -67,26 +70,14 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     protected void handleLogin(String email, String password){
-//        AccountLogin accountLogin = new AccountLogin(email, password);
-//        System.out.println(accountLogin.email + " " + accountLogin.password);
         mApiService.login(email, password).enqueue(new Callback<BaseResponse<Account>>() {
             @Override
             public void onResponse(Call<BaseResponse<Account>> call, Response<BaseResponse<Account>> response) {
                 if(response.body().success && response.isSuccessful()){
                     viewToast(LoginActivity.this, "Success");
-
-//                    TODO: STATIC-in Account Logged nya, jangan pakai shared preferences
                     LoggedAccount.loggedAccount = response.body().payload;
+                    saveCredential(email, password);
                     System.out.println(LoggedAccount.loggedAccount.id);
-//                    SharedPreferences sharedPreferences = getSharedPreferences("account", Context.MODE_PRIVATE);
-//                    SharedPreferences.Editor editor = sharedPreferences.edit();
-//                    editor.putInt("id", response.body().payload.id);
-//                    editor.putString("name", response.body().payload.name);
-//                    editor.putString("email", response.body().payload.email);
-//                    editor.putString("password", response.body().payload.password);
-//                    editor.putFloat("balance", (float)response.body().payload.balance);
-//                    editor.apply();
-//                    finish();
                     moveActivity(LoginActivity.this, MainActivity.class);
                 }else{
                     viewToast(LoginActivity.this, "Error");
@@ -98,5 +89,23 @@ public class LoginActivity extends AppCompatActivity {
                 viewToast(LoginActivity.this, "Error");
             }
         });
+    }
+
+    protected void saveCredential(String email, String password){
+        SharedPreferences sharedPreferences = getSharedPreferences("credential", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("email", email);
+        editor.putString("password", password);
+        editor.apply();
+    }
+
+    protected void checkIfAlreadyLogin(){
+        SharedPreferences sharedPreferences = getSharedPreferences("credential", MODE_PRIVATE);
+        String email = sharedPreferences.getString("email", "");
+        String password = sharedPreferences.getString("password", "");
+        if(!email.isEmpty() && !password.isEmpty()){
+            handleLogin(email, password);
+            System.out.println("EMAIL: " + email + " PASSWORD: " + password);
+        }
     }
 }

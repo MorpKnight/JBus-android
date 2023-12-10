@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?><!-- Auto layout, variables, and unit scale are not yet supported -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipToOutline="true"
     android:orientation="vertical"
     android:paddingHorizontal="16dp"
-    android:paddingTop="20dp">
+    android:paddingTop="20dp"
+    tools:context=".intent.manage.AddStationActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -20,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        app:cardCornerRadius="20dp" >
+        app:cardCornerRadius="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,7 +34,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Station Name"/>
+                android:text="Station Name" />
 
             <EditText
                 android:id="@+id/addstation_stationname"
@@ -44,30 +46,30 @@
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="5dp"
                 android:layout_gravity="center_vertical"
+                android:layout_marginVertical="5dp"
                 android:columnCount="3">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="City"
                     android:layout_gravity="center_vertical"
-                    android:textSize="20sp"
-                    android:layout_marginEnd="10dp"/>
+                    android:layout_marginEnd="10dp"
+                    android:text="City"
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginEnd="10dp"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="10dp"
                     android:src="@drawable/city_icon" />
 
                 <Spinner
                     android:id="@+id/addstation_stationcity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right|center_vertical"/>
+                    android:layout_gravity="right|center_vertical" />
 
             </GridLayout>
 
@@ -75,7 +77,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Station address"/>
+                android:text="Station address" />
 
             <EditText
                 android:id="@+id/addstation_stationaddress"
@@ -87,7 +89,6 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
 
 
     <Button

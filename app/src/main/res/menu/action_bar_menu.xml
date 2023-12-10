@@ -6,7 +6,7 @@
         android:title="Search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="collapseActionView|always"
-        android:icon="@drawable/search_icon"/>
+        android:icon="@drawable/search_icon" />
     <item
         android:id="@+id/payment_icon"
         android:title="Payment"

@@ -5,6 +5,8 @@ import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.BaseResponse;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.Bus;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.BusType;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.Facility;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.MakeBooking;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.Payment;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.Renter;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.Station;
 
@@ -44,6 +46,9 @@ public interface BaseAPIService {
                                               @Field("address") String companyAddress, @Field("phoneNumber") String companyPhone);
 
     @FormUrlEncoded
+    @GET("account/getAccountDetails")
+    Call<BaseResponse<Account>> getAccountDetails(@Field("email") String email, @Field("password") String password);
+    @FormUrlEncoded
     @POST("bus/create")
     Call<BaseResponse<Bus>> create(@Field("accountId") int accountId, @Field("name") String name,
                                    @Field("capacity") int capacity, @Field("facility") List<Facility> facility,
@@ -68,8 +73,20 @@ public interface BaseAPIService {
     @GET("bus/getAllBus")
     Call<List<Bus>> getAllBus();
 
+    @GET("payment/getAllPayment")
+    Call<List<Payment>> getAllPayment();
+
+    @FormUrlEncoded
+    @POST("payment/makeBooking")
+    Call<BaseResponse<MakeBooking>> makeBooking(@Field("buyerId") int buyerId, @Field("renterId") int renterId,
+                                                @Field("busId") int busId, @Field("busSeats") List<String> busSeats,
+                                                @Field("departureDate") String departureDate);
+
+    @FormUrlEncoded
+    @POST("station/create")
+    Call<BaseResponse<Station>> createStation(@Field("stationName") String stationName, @Field("city") String city, @Field("address") String address);
+
     @GET("station/getAll")
     Call<List<Station>> getAllStation();
-
 
 }

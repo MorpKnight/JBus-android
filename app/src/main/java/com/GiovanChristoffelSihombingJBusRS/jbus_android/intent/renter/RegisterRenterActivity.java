@@ -34,10 +34,10 @@ public class RegisterRenterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_renter);
 
-        ET_companyName = findViewById(R.id.register_renter_companyname);
-        ET_companyAddress = findViewById(R.id.register_renter_address);
-        ET_companyPhone = findViewById(R.id.register_renter_phonenumber);
-        registerButton = findViewById(R.id.register_renter_button);
+        ET_companyName = findViewById(R.id.registerrenterr_companyname);
+        ET_companyAddress = findViewById(R.id.registerrenterr_companyaddress);
+        ET_companyPhone = findViewById(R.id.registerrenterr_companyphone);
+        registerButton = findViewById(R.id.registerrenter_button);
         mApiService = UtilsApi.getAPIService();
 
         registerButton.setOnClickListener(new View.OnClickListener() {

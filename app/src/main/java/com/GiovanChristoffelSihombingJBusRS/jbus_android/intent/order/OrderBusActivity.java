@@ -2,6 +2,7 @@ package com.GiovanChristoffelSihombingJBusRS.jbus_android.intent.order;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -13,7 +14,9 @@ import android.widget.Toast;
 
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.R;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.intent.landing.MainActivity;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.Facility;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +29,11 @@ public class OrderBusActivity extends AppCompatActivity {
     private GridLayout scheduleContainer, seatContainer;
     private Button continuePaymentButton;
     private RadioGroup rg;
+    public static String facilitiesList;
     private List<CheckBox> seatCheckBoxes = new ArrayList<>();
-//    private List<RadioButton> scheduleRadioButtons = new ArrayList<>();
+    public static List<String> seatSelected = new ArrayList<>();
+    public static Timestamp scheduleSelected;
+    public static double totalPrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +44,22 @@ public class OrderBusActivity extends AppCompatActivity {
         setter();
         handleSchedule();
         handleSeatBookedPerSchedule();
+        handleContinueButton();
+        handleStringFacility();
+    }
+
+    protected void handleStringFacility(){
+        for (Facility facility : MainActivity.busSelected.facilities) {
+            if(MainActivity.busSelected.facilities.indexOf(facility) == MainActivity.busSelected.facilities.size() - 1) {
+                facilitiesList += facility.toString();
+            } else {
+                facilitiesList += facility.toString() + ", ";
+            }
+        }
     }
 
     private void getter() {
-        busName = findViewById(R.id.orderbus_name);
+        busName = findViewById(R.id.orderbus_busname);
         busType = findViewById(R.id.orderbus_bustype);
         price = findViewById(R.id.orderbus_price);
         seatLeft = findViewById(R.id.orderbus_seatleft);
@@ -50,7 +68,7 @@ public class OrderBusActivity extends AppCompatActivity {
         facilities = findViewById(R.id.orderbus_facilities);
         scheduleContainer = findViewById(R.id.orderbus_schedule);
         seatContainer = findViewById(R.id.orderbus_seat);
-        continuePaymentButton = findViewById(R.id.orderbus_continue);
+        continuePaymentButton = findViewById(R.id.orderbus_button);
     }
 
     private void setter() {
@@ -61,7 +79,7 @@ public class OrderBusActivity extends AppCompatActivity {
 //        seatLeft.setText(MainActivity.busSelected.capacity);
         deptStation.setText(MainActivity.busSelected.departure.stationName);
         arrStation.setText(MainActivity.busSelected.arrival.stationName);
-        facilities.setText(MainActivity.busSelected.facilities.toString());
+        facilities.setText(facilitiesList);
     }
 
     protected void handleSchedule() {
@@ -102,6 +120,7 @@ public class OrderBusActivity extends AppCompatActivity {
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                scheduleSelected = new Timestamp(MainActivity.busSelected.schedules.get(i).departureSchedule.getTime());
                 seatContainer.removeAllViews();
                 MainActivity.busSelected.schedules.forEach(schedule -> {
                     if (schedule.departureSchedule.equals(MainActivity.busSelected.schedules.get(i).departureSchedule)) {
@@ -117,9 +136,33 @@ public class OrderBusActivity extends AppCompatActivity {
         });
     }
 
+    protected void handleContinueButton(){
+        continuePaymentButton.setOnClickListener(v -> {
+            seatSelected.clear();
+            seatCheckBoxes.clear();
+            for (int i = 0; i < seatContainer.getChildCount(); i++) {
+                seatCheckBoxes.add((CheckBox) seatContainer.getChildAt(i));
+            }
+            seatCheckBoxes.forEach(seatCheckBox -> {
+                if (seatCheckBox.isChecked()) {
+                    seatSelected.add(seatCheckBox.getText().toString());
+                }
+            });
+            if (seatSelected.size() == 0 || scheduleSelected == null) {
+                Toast.makeText(this, "Please select at least one schedule or seat", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            totalPrice = MainActivity.busSelected.price.price * seatSelected.size();
+            Intent intent = new Intent(this, MakeBookingActivity.class);
+            finish();
+            startActivity(intent);
+        });
+    }
+
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        startActivity(new Intent(this, MainActivity.class));
         finish();
     }
 }

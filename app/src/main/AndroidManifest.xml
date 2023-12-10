@@ -16,6 +16,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".intent.manage.AddStationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".intent.order.history.HistoryDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".intent.order.history.HistoryListActivity"
+            android:exported="false" />
+        <activity
             android:name=".intent.cancel.CancelBusDetailActivity"
             android:exported="false" />
         <activity

@@ -2,10 +2,12 @@ package com.GiovanChristoffelSihombingJBusRS.jbus_android.intent.manage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -22,6 +24,7 @@ import retrofit2.Response;
 
 public class BusScheduleActivity extends AppCompatActivity {
     private LinearLayout date_time_container;
+    private Spinner scheduleSpinner;
     private Button add_date_time_button;
     private CalendarView calendarView;
     private TimePicker timePicker;
@@ -38,7 +41,6 @@ public class BusScheduleActivity extends AppCompatActivity {
         calendarView = findViewById(R.id.add_edit_schedule_date);
         timePicker = findViewById(R.id.add_edit_schedule_time);
         mApiService = UtilsApi.getAPIService();
-//        select time now to selectedTime
         selectedTime = timePicker.getHour() + ":" + timePicker.getMinute() + ":00";
 
         calendarView.setOnDateChangeListener((calendarView, i, i1, i2) -> {
@@ -59,6 +61,7 @@ public class BusScheduleActivity extends AppCompatActivity {
                         Toast.makeText(BusScheduleActivity.this, response.body().message, Toast.LENGTH_SHORT).show();
                         System.out.println(response.body().payload);
                         finish();
+                        startActivity(new Intent(BusScheduleActivity.this, ManageBusActivity.class));
                     }
                 }
 
