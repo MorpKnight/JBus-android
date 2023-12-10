@@ -9,6 +9,7 @@ import android.widget.ListView;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.R;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.adapter.ManageBusAdapter;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.Bus;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.LoggedAccount;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.request.BaseAPIService;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.request.UtilsApi;
 
@@ -42,7 +43,7 @@ public class CancelBusActivity extends AppCompatActivity {
     }
 
     protected void getAllBus(){
-        mApiService.getAllBus().enqueue(new Callback<List<Bus>>() {
+        mApiService.getMyBus(LoggedAccount.loggedAccount.id).enqueue(new Callback<List<Bus>>() {
             @Override
             public void onResponse(Call<List<Bus>> call, Response<List<Bus>> response) {
                 busList = response.body();

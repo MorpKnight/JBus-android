@@ -68,7 +68,8 @@
                 android:id="@+id/registerrenter_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Register Company !!" />
+                app:cornerRadius="20dp"
+                android:text="Register Company" />
 
         </LinearLayout>
 

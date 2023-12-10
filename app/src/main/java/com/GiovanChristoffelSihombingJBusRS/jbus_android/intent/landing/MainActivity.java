@@ -38,7 +38,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
     public MenuItem searchItem, profileItem, paymentItem;
     public ListView listView;
 
@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity{
     private HorizontalScrollView pageScroll = null;
     private BaseAPIService mApiService;
     public static Bus busSelected;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity{
         getBusList();
         getAllPayment();
 
-        if(listBus != null){
+        if (listBus != null) {
             paginationFooter();
             viewPaginatedList(listBus, currentPage);
         } else {
@@ -79,41 +80,42 @@ public class MainActivity extends AppCompatActivity{
         }
 
         prevButton.setOnClickListener(v -> {
-            if(currentPage > 0){
+            if (currentPage > 0) {
                 currentPage--;
                 goToPage(currentPage);
             }
         });
 
         nextButton.setOnClickListener(v -> {
-            if(currentPage < noOfPages - 1){
+            if (currentPage < noOfPages - 1) {
                 currentPage++;
                 goToPage(currentPage);
             }
         });
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            Bus bus = (Bus) parent.getItemAtPosition(position);
-            busSelected = bus;
-            Intent intent = new Intent(MainActivity.this, OrderBusActivity.class);
-            finish();
-            startActivity(intent);
+            try {
+                busSelected = listBus.get(position);
+                startActivity(new Intent(MainActivity.this, OrderBusActivity.class));
+            } catch (Exception e) {
+                viewToast(this, "No Bus Available");
+            }
         });
 
     }
 
-    private void paginationFooter(){
+    private void paginationFooter() {
         int val = listSize % pageSize;
         val = val == 0 ? 0 : 1;
         noOfPages = listSize / pageSize + val;
 
         LinearLayout ll = findViewById(R.id.pageNumberContainer);
         btns = new Button[noOfPages];
-        if(noOfPages <= 6){
+        if (noOfPages <= 6) {
             ((FrameLayout.LayoutParams) ll.getLayoutParams()).gravity = Gravity.CENTER;
         }
 
-        for(int i = 0; i < noOfPages; i++){
+        for (int i = 0; i < noOfPages; i++) {
             btns[i] = new Button(this);
             btns[i].setBackgroundColor(getResources().getColor(android.R.color.transparent));
             btns[i].setText("" + (i + 1));
@@ -129,9 +131,9 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    private void goToPage(int index){
-        for(int i = 0; i < noOfPages; i++){
-            if(i == index){
+    private void goToPage(int index) {
+        for (int i = 0; i < noOfPages; i++) {
+            if (i == index) {
                 btns[i].setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
                 btns[i].setTextColor(getResources().getColor(android.R.color.white));
                 scrollToItem(btns[index]);
@@ -157,7 +159,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.action_bar_menu, menu);
         searchItem = menu.findItem(R.id.search_icon);
@@ -185,7 +187,7 @@ public class MainActivity extends AppCompatActivity{
         return true;
     }
 
-    protected void getBusList(){
+    protected void getBusList() {
         mApiService.getAllBus().enqueue(new Callback<List<Bus>>() {
             @Override
             public void onResponse(Call<List<Bus>> call, Response<List<Bus>> response) {
@@ -204,13 +206,13 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
-    protected void getAllPayment(){
+    protected void getAllPayment() {
         mApiService.getAllPayment().enqueue(new Callback<List<Payment>>() {
             @Override
             public void onResponse(Call<List<Payment>> call, Response<List<Payment>> response) {
                 OrderHistory.payments = response.body();
                 OrderHistory.payments.forEach(payment -> {
-                    if(payment.buyerId == LoggedAccount.loggedAccount.id){
+                    if (payment.buyerId == LoggedAccount.loggedAccount.id) {
                         OrderHistory.accountPayments.add(payment);
                     }
                 });
@@ -223,15 +225,15 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
-    private void viewToast(Context ctx, String msg){
+    private void viewToast(Context ctx, String msg) {
         Toast.makeText(ctx, msg, Toast.LENGTH_SHORT).show();
     }
 
-    protected void updateBalance(){
+    protected void updateBalance() {
         mApiService.getAccountDetails(LoggedAccount.loggedAccount.email, LoggedAccount.loggedAccount.password).enqueue(new Callback<BaseResponse<Account>>() {
             @Override
             public void onResponse(Call<BaseResponse<Account>> call, Response<BaseResponse<Account>> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     LoggedAccount.loggedAccount = response.body().payload;
                 }
             }

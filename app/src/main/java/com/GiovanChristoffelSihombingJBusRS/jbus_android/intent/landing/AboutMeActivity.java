@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,34 +32,11 @@ public class AboutMeActivity extends AppCompatActivity {
     public TextView aboutMeName, aboutMeEmail, aboutMeBalance, nameInitial, renterTitle, renterMessage;
     private String name, email;
     private float balance;
-    private View topUpButton, renterButton, cancelBus, cancelApproval;
+    private View topUpButton, renterButton;
+    private LinearLayout cancelBus, cancelApproval;
     private Button logoutButton;
     private EditText topUpAmount;
     private BaseAPIService mApiService;
-    private int id;
-
-    protected void getter() {
-        aboutMeName = findViewById(R.id.aboutme_username);
-        aboutMeEmail = findViewById(R.id.aboutme_email);
-        aboutMeBalance = findViewById(R.id.aboutme_balance_value);
-        nameInitial = findViewById(R.id.aboutme_profile_initial);
-        topUpButton = findViewById(R.id.aboutme_topup_button);
-        topUpAmount = findViewById(R.id.aboutme_topup_value);
-        renterButton = findViewById(R.id.aboutme_renter);
-        renterTitle = findViewById(R.id.aboutme_renter_title);
-        renterMessage = findViewById(R.id.aboutme_renter_desc);
-        cancelBus = findViewById(R.id.aboutme_cancelbus);
-        cancelApproval = findViewById(R.id.aboutme_approval);
-        logoutButton = findViewById(R.id.aboutme_logout_button);
-        mApiService = UtilsApi.getAPIService();
-    }
-
-    protected void setter() {
-        aboutMeName.setText(LoggedAccount.loggedAccount.name);
-        aboutMeEmail.setText(LoggedAccount.loggedAccount.email);
-        aboutMeBalance.setText(String.format("Rp. %s", LoggedAccount.loggedAccount.balance));
-        nameInitial.setText(LoggedAccount.loggedAccount.name.substring(0, 1));
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +44,7 @@ public class AboutMeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about_me);
         getter();
         setter();
+        handleIfNotRenter();
 
         if (LoggedAccount.loggedAccount.company != null) {
             renterTitle.setText("Manage Bus");
@@ -117,12 +96,21 @@ public class AboutMeActivity extends AppCompatActivity {
         });
     }
 
+    protected void handleIfNotRenter(){
+        if(LoggedAccount.loggedAccount.company == null){
+            cancelBus.setVisibility(View.GONE);
+            cancelApproval.setVisibility(View.GONE);
+        }
+    }
+
     protected void handleTopUp(Double value) {
-        mApiService.topUp(id, value).enqueue(new Callback<BaseResponse<Double>>() {
+        mApiService.topUp(LoggedAccount.loggedAccount.id, value).enqueue(new Callback<BaseResponse<Double>>() {
             @Override
             public void onResponse(Call<BaseResponse<Double>> call, Response<BaseResponse<Double>> response) {
                 Toast.makeText(AboutMeActivity.this, "Top Up Success", Toast.LENGTH_SHORT).show();
                 LoggedAccount.loggedAccount.balance = response.body().payload;
+                System.out.println(response.body().payload);
+                System.out.println(value);
                 try {
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(topUpAmount.getWindowToken(), 0);
@@ -149,5 +137,28 @@ public class AboutMeActivity extends AppCompatActivity {
     public void onBackPressed() {
         finish();
         startActivity(new Intent(this, MainActivity.class));
+    }
+
+    protected void getter() {
+        aboutMeName = findViewById(R.id.aboutme_username);
+        aboutMeEmail = findViewById(R.id.aboutme_email);
+        aboutMeBalance = findViewById(R.id.aboutme_balance_value);
+        nameInitial = findViewById(R.id.aboutme_profile_initial);
+        topUpButton = findViewById(R.id.aboutme_topup_button);
+        topUpAmount = findViewById(R.id.aboutme_topup_value);
+        renterButton = findViewById(R.id.aboutme_renter);
+        renterTitle = findViewById(R.id.aboutme_renter_title);
+        renterMessage = findViewById(R.id.aboutme_renter_desc);
+        cancelBus = findViewById(R.id.aboutme_cancelbus);
+        cancelApproval = findViewById(R.id.aboutme_approval);
+        logoutButton = findViewById(R.id.aboutme_logout_button);
+        mApiService = UtilsApi.getAPIService();
+    }
+
+    protected void setter() {
+        aboutMeName.setText(LoggedAccount.loggedAccount.name);
+        aboutMeEmail.setText(LoggedAccount.loggedAccount.email);
+        aboutMeBalance.setText(String.format("Rp. %s", LoggedAccount.loggedAccount.balance));
+        nameInitial.setText(LoggedAccount.loggedAccount.name.substring(0, 1));
     }
 }

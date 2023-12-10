@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.R;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.BaseResponse;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.Bus;
+import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.LoggedAccount;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.model.Schedule;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.request.BaseAPIService;
 import com.GiovanChristoffelSihombingJBusRS.jbus_android.request.UtilsApi;
@@ -109,7 +110,9 @@ public class CancelBusDetailActivity extends AppCompatActivity {
 
     protected void deleteBus() {
         cancelBusButton.setOnClickListener(view -> {
-            mApiService.delete(CancelBusActivity.renterSelectedBus.id).enqueue(new Callback<BaseResponse<Bus>>() {
+            System.out.println("Bus id: " + CancelBusActivity.renterSelectedBus.id);
+            System.out.println("Account id: " + LoggedAccount.loggedAccount.id);
+            mApiService.delete(CancelBusActivity.renterSelectedBus.id, LoggedAccount.loggedAccount.id).enqueue(new Callback<BaseResponse<Bus>>() {
                 @Override
                 public void onResponse(Call<BaseResponse<Bus>> call, Response<BaseResponse<Bus>> response) {
                     if(response.isSuccessful()){

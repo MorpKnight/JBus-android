@@ -32,7 +32,7 @@ public interface BaseAPIService {
 
     @FormUrlEncoded
     @POST("account/login")
-    Call<BaseResponse<Account>> login(@Field ("email") String email, @Field("password") String password);
+    Call<BaseResponse<Account>> login(@Field("email") String email, @Field("password") String password);
 //    Call<BaseResponse<Account>> login(@Query("email") String email, @Query("password") String password);
 
     @FormUrlEncoded
@@ -48,6 +48,7 @@ public interface BaseAPIService {
     @FormUrlEncoded
     @GET("account/getAccountDetails")
     Call<BaseResponse<Account>> getAccountDetails(@Field("email") String email, @Field("password") String password);
+
     @FormUrlEncoded
     @POST("bus/create")
     Call<BaseResponse<Bus>> create(@Field("accountId") int accountId, @Field("name") String name,
@@ -56,8 +57,9 @@ public interface BaseAPIService {
                                    @Field("stationDepartureId") int stationDepartureId, @Field("stationArrivalId") int stationArrivalId);
 
 
+    @FormUrlEncoded
     @POST("bus/delete")
-    Call<BaseResponse<Bus>> delete(@Body int id);
+    Call<BaseResponse<Bus>> delete(@Field("busId") int busId, @Field("accountId") int accountId);
 
     @FormUrlEncoded
     @POST("bus/deleteSchedule")
@@ -81,6 +83,15 @@ public interface BaseAPIService {
     Call<BaseResponse<MakeBooking>> makeBooking(@Field("buyerId") int buyerId, @Field("renterId") int renterId,
                                                 @Field("busId") int busId, @Field("busSeats") List<String> busSeats,
                                                 @Field("departureDate") String departureDate);
+
+    @GET("payment/getMyPayment/{id}")
+    Call<List<Payment>> getMyPayment(@Path("id") int id);
+
+    @POST("payment/{id}/cancel")
+    Call<BaseResponse<Payment>> cancelPayment(@Path("id") int id);
+
+    @POST("payment/{id}/accept")
+    Call<BaseResponse<Payment>> acceptPayment(@Path("id") int id);
 
     @FormUrlEncoded
     @POST("station/create")

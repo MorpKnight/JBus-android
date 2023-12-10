@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -66,16 +67,12 @@ public class RegisterActivity extends AppCompatActivity {
             public void onResponse(Call<BaseResponse<Account>> call, Response<BaseResponse<Account>> response) {
                 if(response.body().success && response.isSuccessful()){
                     viewToast(RegisterActivity.this, "Register Success");
+                    SharedPreferences sharedPreferences = getSharedPreferences("credential", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("email", email);
+                    editor.putString("password", password);
+                    editor.apply();
                     LoggedAccount.loggedAccount = response.body().payload;
-//                    SharedPreferences sharedPreferences = getSharedPreferences("account", Context.MODE_PRIVATE);
-//                    SharedPreferences.Editor editor = sharedPreferences.edit();
-//                    editor.putInt("id", response.body().payload.id);
-//                    editor.putString("name", response.body().payload.name);
-//                    editor.putString("email", response.body().payload.email);
-//                    editor.putString("password", response.body().payload.password);
-//                    editor.putFloat("balance", (float)response.body().payload.balance);
-//                    editor.commit();
-
                     moveActivity(RegisterActivity.this, MainActivity.class);
                 }else{
                     viewToast(RegisterActivity.this, "Register Failed");

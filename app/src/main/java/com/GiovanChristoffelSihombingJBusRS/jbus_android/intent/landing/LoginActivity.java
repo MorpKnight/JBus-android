@@ -36,10 +36,10 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         mApiService = UtilsApi.getAPIService();
 
-        registerButton = findViewById(R.id.create_account);
+        registerButton = findViewById(R.id.login_creaeteaccount);
         loginButton = findViewById(R.id.login_button);
-        emailInput = findViewById(R.id.login_input_email);
-        passwordInput = findViewById(R.id.login_input_password);
+        emailInput = findViewById(R.id.login_email);
+        passwordInput = findViewById(R.id.login_password);
 
         registerButton.setOnClickListener(v -> moveActivity(LoginActivity.this, RegisterActivity.class));
 

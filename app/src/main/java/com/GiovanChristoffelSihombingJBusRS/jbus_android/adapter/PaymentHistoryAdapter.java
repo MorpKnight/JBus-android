@@ -40,7 +40,7 @@ public class PaymentHistoryAdapter extends ArrayAdapter<PaymentHistory> {
         busName.setText(paymentHistory.busName);
         route.setText(paymentHistory.route);
         date.setText(paymentHistory.date);
-        price.setText(paymentHistory.price);
+        price.setText("Rp. " + paymentHistory.price);
         return convertView;
     }
 }
